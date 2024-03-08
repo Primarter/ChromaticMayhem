@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246ed7919e9b8834380b3189f45d3230, type: 3}
+  m_Name: Bust Config
+  m_EditorClassIdentifier: 
+  attackSpeed: 40
+  defaultSpeed: 2.5
+  attackStartup: 0.75
+  attackDuration: 0.35
+  attackEndlag: 2
+  attackCooldown: 0.75
+  staggerDuration: 1
+  detectionRange: 11
+  maxDetectionRange: 50
+  attackRange: 8
+  initialState: 1
