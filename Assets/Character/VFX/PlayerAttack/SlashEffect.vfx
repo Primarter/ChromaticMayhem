@@ -944,7 +944,7 @@ MonoBehaviour:
   zTestMode: 0
   useAlphaClipping: 0
   generateMotionVector: 0
-  excludeFromTAA: 0
+  excludeFromTUAndAA: 0
   sortingPriority: 0
   m_SubOutputs: []
   colorMapping: 0
@@ -961,8 +961,7 @@ MonoBehaviour:
   castShadows: 0
   useExposureWeight: 0
   needsOwnSort: 0
-  shaderGraph: {fileID: -5475051401550479605, guid: c85a8117df68947449bad37341144133,
-    type: 3}
+  shaderGraph: {fileID: -5475051401550479605, guid: c85a8117df68947449bad37341144133, type: 3}
   materialSettings:
     m_PropertyNames: []
     m_PropertyValues: []
@@ -993,7 +992,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2534964839176971238,"guid":"18bc473bf47c747449d8c6c0a459a9d4","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":124007798685723775,"guid":"d37d40176bad8cf4f9b973924c927de9","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mesh
@@ -4182,7 +4181,7 @@ MonoBehaviour:
   zTestMode: 0
   useAlphaClipping: 0
   generateMotionVector: 0
-  excludeFromTAA: 0
+  excludeFromTUAndAA: 0
   sortingPriority: 0
   m_SubOutputs: []
   colorMapping: 0
@@ -4199,8 +4198,7 @@ MonoBehaviour:
   castShadows: 0
   useExposureWeight: 0
   needsOwnSort: 0
-  shaderGraph: {fileID: -5475051401550479605, guid: c85a8117df68947449bad37341144133,
-    type: 3}
+  shaderGraph: {fileID: -5475051401550479605, guid: c85a8117df68947449bad37341144133, type: 3}
   materialSettings:
     m_PropertyNames: []
     m_PropertyValues: []
@@ -4607,7 +4605,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2534964839176971238,"guid":"18bc473bf47c747449d8c6c0a459a9d4","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":124007798685723775,"guid":"d37d40176bad8cf4f9b973924c927de9","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mesh
