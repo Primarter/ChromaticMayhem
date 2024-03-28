@@ -7,7 +7,7 @@ namespace Knossos.Character
 
 public class ClearTriggerBehaviour : StateMachineBehaviour
 {
-    public string trigger;
+    public string boolParam;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     // override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     // {
@@ -23,7 +23,7 @@ public class ClearTriggerBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger(trigger);
+        animator.SetBool(boolParam, false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -36,13 +36,13 @@ public class AnimationSystem : MonoBehaviour
             var agent = minotaurAgent.locomotionSystem.navMeshAgent;
             float v = agent.speed > 0f ? agent.velocity.magnitude / agent.speed : 0f;
             animator.SetFloat("Velocity", v);
-            animator.ResetTrigger("Attack");
+            animator.SetBool("Attack", false);
         }
     }
 
     public void TriggerAttack()
     {
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attack", true);
     }
 
     public void OnAttackActiveEvent()
