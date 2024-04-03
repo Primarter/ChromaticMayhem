@@ -59,14 +59,17 @@ public class AnimationClipUpdater : EditorWindow
             if (oldClip != null) {
                 // Save stuff to port to new animation
                 AnimationEvent[] events = AnimationUtility.GetAnimationEvents(oldClip);
-                AnimationClipSettings settings = AnimationUtility.GetAnimationClipSettings(oldClip);
+                AnimationClipSettings oldSettings = AnimationUtility.GetAnimationClipSettings(oldClip);
+                
 
                 // Copy new animations into old animation
                 EditorUtility.CopySerialized(newClip, oldClip);
+                var newSettings = AnimationUtility.GetAnimationClipSettings(newClip);
+                newSettings.loopTime = oldSettings.loopTime;
 
                 // Reset old stuff to old animation
                 AnimationUtility.SetAnimationEvents(oldClip, events);
-                AnimationUtility.SetAnimationClipSettings(oldClip, settings);
+                AnimationUtility.SetAnimationClipSettings(oldClip, newSettings);
 
                 AssetDatabase.SaveAssets();
                 Debug.Log("Updated " + oldClip.name);
