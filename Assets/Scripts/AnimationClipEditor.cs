@@ -35,7 +35,7 @@ public class AnimationClipUpdater : EditorWindow
         "mirror",
     };
 
-    [MenuItem("Window/Animation/Animation Events Updater")]
+    [MenuItem("Window/Animation/Animation Clips Updater")]
     public static void ShowWindow()
     {
         AnimationClipUpdater wnd = GetWindow<AnimationClipUpdater>();
