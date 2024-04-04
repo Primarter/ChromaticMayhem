@@ -5,12 +5,34 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Reflection;
 
 public class AnimationClipUpdater : EditorWindow
 {
     GameObject sourceFbx;
     string folder = "Clips";
+
+    int flags;
+    static string[] updateSettings = {
+        "additiveReferencePoseClip",
+        "additiveReferencePoseTime",
+        "startTime",
+        "stopTime",
+        "orientationOffsetY",
+        "level",
+        "cycleOffset",
+        "hasAdditiveReferencePose",
+        "loopTime",
+        "loopBlend",
+        "loopBlendOrientation",
+        "loopBlendPositionY",
+        "loopBlendPositionXZ",
+        "keepOriginalOrientation",
+        "keepOriginalPositionY",
+        "keepOriginalPositionXZ",
+        "heightFromFeet",
+        "mirror",
+    };
 
     [MenuItem("Window/Animation/Animation Events Migrator")]
     public static void ShowWindow()
@@ -26,7 +48,14 @@ public class AnimationClipUpdater : EditorWindow
         EditorGUILayout.Space();
 
         sourceFbx = (GameObject) EditorGUILayout.ObjectField("Source FBX", sourceFbx, typeof (GameObject), false);
-        folder = EditorGUILayout.TextField(new GUIContent("Clips Resources Folder", "The path is passed straight to Resources.LoadAll"), folder);
+        folder = EditorGUILayout.TextField(
+            new GUIContent("Clips Resources Folder", "The path is passed straight to Resources.LoadAll"),
+            folder
+        );
+        flags = EditorGUILayout.MaskField(
+            new GUIContent("Transfer Settings", "Check which AnimationClipSettings modifications should be kept (e.g. loopTime, mirror, etc)"),
+            flags, updateSettings
+        );
 
         EditorGUILayout.Separator();
         if (GUILayout.Button("Update"))
@@ -65,7 +94,8 @@ public class AnimationClipUpdater : EditorWindow
                 // Copy new animations into old animation
                 EditorUtility.CopySerialized(newClip, oldClip);
                 var newSettings = AnimationUtility.GetAnimationClipSettings(newClip);
-                newSettings.loopTime = oldSettings.loopTime;
+                UpdateAnimationClipSettings(oldSettings, newSettings);
+
 
                 // Reset old stuff to old animation
                 AnimationUtility.SetAnimationEvents(oldClip, events);
@@ -78,6 +108,17 @@ public class AnimationClipUpdater : EditorWindow
                 oldClip = new AnimationClip();
                 EditorUtility.CopySerialized(newClip, oldClip);
                 AssetDatabase.CreateAsset (oldClip, clipsPath);
+            }
+        }
+    }
+
+    // reflection tomfoolery to avoid the if forest that would be needed
+    void UpdateAnimationClipSettings(AnimationClipSettings oldSettings, AnimationClipSettings newSettings)
+    {
+        for (int i = 0; i < updateSettings.Length; i++) {
+            PropertyInfo prop = typeof(AnimationClipSettings).GetProperty(updateSettings[i], BindingFlags.Public | BindingFlags.Instance);
+            if ((flags & (1 << i)) != 0) {
+                prop.SetValue(newSettings, prop.GetValue(oldSettings));
             }
         }
     }
