@@ -9,10 +9,11 @@ using System.Reflection;
 
 public class AnimationClipUpdater : EditorWindow
 {
-    GameObject sourceFbx;
-    string folder = "Clips";
+    [SerializeField] string sourceFbxGuid = null;
+    [SerializeField] GameObject sourceFbx;
+    [SerializeField] string folder = "";
 
-    int flags;
+    [SerializeField] int flags;
     static string[] updateSettings = {
         "additiveReferencePoseClip",
         "additiveReferencePoseTime",
@@ -34,17 +35,33 @@ public class AnimationClipUpdater : EditorWindow
         "mirror",
     };
 
-    [MenuItem("Window/Animation/Animation Events Migrator")]
+    [MenuItem("Window/Animation/Animation Events Updater")]
     public static void ShowWindow()
     {
         AnimationClipUpdater wnd = GetWindow<AnimationClipUpdater>();
         wnd.titleContent = new GUIContent("Animation Clip Updater");
     }
 
+    protected void OnEnable ()
+    {
+        var data = EditorPrefs.GetString("AnimationClipUpdaterWindow", JsonUtility.ToJson(this, false));
+        JsonUtility.FromJsonOverwrite(data, this);
+        if (sourceFbxGuid != null) {
+            sourceFbx = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(sourceFbxGuid));
+        }
+    }
+
+    protected void OnDisable ()
+    {
+        sourceFbxGuid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(sourceFbx));
+        var data = JsonUtility.ToJson(this, false);
+        EditorPrefs.SetString("AnimationClipUpdaterWindow", data);
+    }
+
     void OnGUI()
     {
         EditorGUILayout.Space();
-        GUILayout.Label("Fill this in to update your animation clips while keeping their events and settings", EditorStyles.boldLabel);
+        EditorGUILayout.HelpBox("Fill this in to update your animation clips while keeping their events and settings", MessageType.Info);
         EditorGUILayout.Space();
 
         sourceFbx = (GameObject) EditorGUILayout.ObjectField("Source FBX", sourceFbx, typeof (GameObject), false);
@@ -116,7 +133,7 @@ public class AnimationClipUpdater : EditorWindow
     void UpdateAnimationClipSettings(AnimationClipSettings oldSettings, AnimationClipSettings newSettings)
     {
         for (int i = 0; i < updateSettings.Length; i++) {
-            PropertyInfo prop = typeof(AnimationClipSettings).GetProperty(updateSettings[i], BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo prop = typeof(AnimationClipSettings).GetField(updateSettings[i], BindingFlags.Public | BindingFlags.Instance);
             if ((flags & (1 << i)) != 0) {
                 prop.SetValue(newSettings, prop.GetValue(oldSettings));
             }
