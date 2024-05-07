@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: InputConfig
   m_EditorClassIdentifier: 
   dodgeBufferDuration: 200
-  attackBufferDuration: 150
+  attackBufferDuration: 100
   specialBufferDuration: 200

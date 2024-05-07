@@ -31,7 +31,7 @@ public class AttackController : MonoBehaviour
 
     public void UpdateAttack()
     {
-        if (InputManager.CheckBuffer(BufferedInput.Attack, false))
+        if (InputManager.CheckBuffer(BufferedInput.Attack))
         {
             dodgeController.canDash = false;
             EnableSlowMotion();
@@ -39,7 +39,7 @@ public class AttackController : MonoBehaviour
             animationController.ResetSpecial();
             animationController.TriggerAttack();
         }
-        if (InputManager.CheckBuffer(BufferedInput.Special, false) && canSpecial)
+        if (InputManager.CheckBuffer(BufferedInput.Special) && canSpecial)
         {
             dodgeController.canDash = false;
             EnableSlowMotion();
@@ -69,7 +69,6 @@ public class AttackController : MonoBehaviour
 
     public void StartSpecial()
     {
-        // GetComponent<SoundController>().PlaySpecialAttackSound();
         StartCoroutine(SpecialCooldown());
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   speed: 5
-  attackMoveSpeedMultiplier: 0.05
+  attackMoveSpeedMultiplier: 0.125
   attackRotationSpeedMultiplier: 0.2
   rotationSpeed: 10
   DashSpeedCurve:

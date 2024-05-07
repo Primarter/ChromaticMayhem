@@ -65,32 +65,32 @@ public class AnimationController : MonoBehaviour
 
     public void TriggerDodge()
     {
-        animator.SetBool("Dodge", true);
+        animator.SetTrigger("Dodge");
     }
 
     public void TriggerAttack()
     {
-        animator.SetBool("Attack", true);
+        animator.SetTrigger("Attack");
     }
 
     public void TriggerSpecial()
     {
-        animator.SetBool("Special", true);
+        animator.SetTrigger("Special");
     }
 
     public void ResetAttack()
     {
-        animator.SetBool("Attack", false);
+        animator.ResetTrigger("Attack");
     }
 
     public void ResetSpecial()
     {
-        animator.SetBool("Special", false);
+        animator.ResetTrigger("Special");
     }
 
     public void ResetDodge()
     {
-        animator.SetBool("Dodge", false);
+        animator.ResetTrigger("Dodge");
     }
 
     public void SetMoveSpeed(float moveSpeed)
